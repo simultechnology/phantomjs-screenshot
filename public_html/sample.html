@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://api.its-mo.com/cgi/loader.cgi?key=JSZ752c40ded32d&ver=2.0&api=zdcmap.js,amagumo.js,control.js&enc=EUC&force=1" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        function loadMap() {
+            var map = new ZDC.Map(
+                    document.getElementById('ZMap'),
+                    {
+                        zoom: 0,
+//                        mapType: ZDC.MAPTYPE_FLAT_COLOR,
+                        mapType: ZDC.MAPTYPE_HIGHRESOLUTION,
+                        crPos: 9
+                    }
+            );
+            var amagumo = new ZDC.Amagumo(0);
+            map.addWidget(amagumo);
+        }
+
+    </script>
+</head>
+<style type="text/css">
+
+    body {
+        margin: 0;
+    }
+
+    #ZMap {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+<body onload="loadMap();">
+<div id="ZMap"></div>
+</body>
+</html>

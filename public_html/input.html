@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style type="text/css">
+  * {
+    font-size: 1.0em;
+  }
+  input[type="name"] {
+    width: 50%;
+    font-size: 1.2em;
+  }
+</style>
+<body>
+<div>
+  <input type="button" id="amagumo-btn" value="雨雲画像生成">
+</div>
+<div>
+  任意のURLから画像生成 :
+  <input type="name" name="url" id="url" placeholder="http://yahoo.co.jp">
+  <input type="button" id="submit" value="送信">
+  <input type="button" id="clear" value="クリア">
+</div>
+<div>
+  <img src="" id="thumbnail" width="225" height="126">
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+
+  $(function () {
+
+    $('#amagumo-btn').on('click', function () {
+      sendRequest();
+    });
+
+    $('#submit').on('click', function () {
+      var url = $('#url').val();
+      sendRequest(url);
+    });
+
+    $('#clear').on('click', function () {
+      var url = $('#url').val('');
+    });
+  });
+
+  function sendRequest(url) {
+
+    var targetUrl = location.origin + location.pathname;
+    // 末尾が'/'で終わっていない場合は'/'を追加する
+    if (targetUrl.lastIndexOf('/') !== targetUrl.length - 1) {
+      targetUrl += '/'
+    }
+    $.get(targetUrl + 'resize', {url: url})
+        .then(function (data) {
+          $('#thumbnail').attr('src', data);
+        });
+  }
+</script>
+</body>
+</html>
